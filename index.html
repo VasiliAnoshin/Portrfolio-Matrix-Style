@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>knock knock</title>
+
+	<meta name="description" content="web development">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body style="z-index:1;">
+	<canvas id="canv"  width="1920" height="1080" style="position:fixed; top: 0;left: 0; z-index:-9999">
+	</canvas>
+	<div id="terminal" style="z-index:1">
+	</div>
+	
+	<section id="terminal-line">
+		<p>> <input id="term-prompt" /></p>
+	</section>
+
+	<footer></footer>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+	<script src="js/next.js"></script>
+</body>
+
+<script>
+	const canvas = document.getElementById("canv");
+	const ctx = canvas.getContext("2d");
+
+	const w = (canvas.width = document.body.offsetWidth);
+	const h = (canvas.height = document.body.offsetHeight);
+	const cols = Math.floor(w / 20) + 1;
+	const ypos = Array(cols).fill(0);
+
+	//ctx.fillStyle = "#000";
+	ctx.fillStyle = "#111";
+	ctx.fillRect(0, 0, w, h);
+
+	function matrix() {
+	//ctx.fillStyle = "#0001";
+	ctx.fillStyle = "#1111";
+	ctx.fillRect(0, 0, w, h);
+
+	//ctx.fillStyle = "#0f0";
+	ctx.fillStyle = "#479";
+	ctx.font = "15pt monospace";
+	// ctx.filter = 'blur(1px)';
+
+	ypos.forEach((y, ind) => {
+		const text = String.fromCharCode(Math.random() * 128);
+		const x = ind * 20;
+		ctx.fillText(text, x, y);
+		if (y > 100 + Math.random() * 10000) ypos[ind] = 0;
+		else ypos[ind] = y + 20;
+	});
+	}
+
+	setInterval(matrix, 50);
+
+</script>
+</html>
